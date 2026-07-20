@@ -140,7 +140,7 @@ xPathScrapers:
         selector: //p[@id="biotext"]
       Image:
         # first main profile image; hrefs are URL-encoded relative paths (/pics/Name%20x.jpg)
-        selector: //div[@id="profbox2"]//a[@class="img"]/@href
+        selector: (//div[@id="profbox2"]//a[@class="img"])[1]/@href
         postProcess:
           - replace:
               - regex: ^
