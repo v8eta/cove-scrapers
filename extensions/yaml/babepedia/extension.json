@@ -1,0 +1,24 @@
+{
+  "id": "cove.community.scrapers.yaml.babepedia",
+  "name": "Babepedia",
+  "version": "1.0.0",
+  "description": "YAML metadata scraper for Babepedia (performer search + performer-by-URL).",
+  "url": "https://github.com/v8eta/cove-scrapers",
+  "kind": "scraper-pack",
+  "minCoveVersion": "0.0.32",
+  "categories": [
+    "scraper",
+    "metadata",
+    "yaml-scraper"
+  ],
+  "scraperFiles": [
+    "scrapers/babepedia.yml"
+  ],
+  "permissions": {
+    "network": [
+      "*.babepedia.com",
+      "babepedia.com",
+      "www.babepedia.com"
+    ]
+  }
+}
