@@ -125,13 +125,17 @@ xPathScrapers:
               - regex: \[\d*\]
                 with: ""
       Image:
-        # Cove port: direct infobox image (upstream's documented alternative).
-        # The upstream subScraper variant fetched the full-res file page; Cove's
-        # YAML engine has no subScraper support yet, so we accept the thumbnail.
-        selector: //table[contains(@class,"infobox")]//img/@src
+        # Cove port: the upstream subScraper (unsupported in Cove) followed the
+        # image page to find the full-res file. MediaWiki thumb URLs embed the
+        # original path (/wiki/images/thumb/<hash>/<file>/<N>px-<file>), so we
+        # reconstruct the full-res original with a plain regex instead — same
+        # result, no second request. RE2-safe (no lookaheads).
+        selector: //table[contains(@class,"infobox")]//a[contains(@class,"mw-file-description")]/img/@src
         postProcess:
           - replace:
-              - regex: ^(?!https?://)
+              - regex: /thumb/(.+)/\d+px-[^/]+$
+                with: /$1
+              - regex: ^
                 with: https://www.boobpedia.com
       URLs:
         selector: //script[contains(.,"wgPageName")]
